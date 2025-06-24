@@ -1,0 +1,30 @@
+# Git
+.git
+.gitignore
+README.md
+DESIGN.md
+
+# Build artifacts
+evaluation-service
+*.exe
+
+# Test files
+test_service.sh
+test_payload.json
+
+# Development files
+.vscode
+.idea
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Temporary files
+tmp/
+temp/ 
