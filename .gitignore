@@ -1,0 +1,8 @@
+# Environment files
+.env
+.env.local
+
+# Build artifacts
+evaluation-service
+
+problem.md
