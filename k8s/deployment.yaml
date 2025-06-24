@@ -17,11 +17,16 @@ spec:
       containers:
       - name: evaluation-service
         image: evaluation-service:latest
+        imagePullPolicy: Never
         ports:
         - containerPort: 8080
         env:
         - name: PORT
           value: "8080"
+        - name: MIN_PAYLOAD_SIZE
+          value: "10" # Override for production to configure 1KiB minimum.
+        - name: OPENROUTER_MODEL
+          value: "deepseek/deepseek-r1-0528:free" # Override for production to configure model.
         - name: OPENROUTER_API_KEY
           valueFrom:
             secretKeyRef:
@@ -59,13 +64,4 @@ spec:
       port: 80
       targetPort: 8080
   type: ClusterIP
----
-apiVersion: v1
-kind: Secret
-metadata:
-  name: evaluation-service-secrets
-type: Opaque
-data:
-  # Base64 encoded OpenRouter API key, currently `your-openrouter-api-key-here`
-  # Replace below value with actual base64 encoded key
-  openrouter-api-key: eW91ci1vcGVucm91dGVyLWFwaS1rZXktaGVyZQ==
+# Note: Secret is created automatically by 'make minikube-deploy' using OPENROUTER_API_KEY environment variable

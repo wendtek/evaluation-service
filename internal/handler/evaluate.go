@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"io"
+	"log"
 	"net/http"
 
 	"github.com/wendtek/evaluation-service/internal/service"
@@ -65,6 +66,7 @@ func (h *EvaluateHandler) Handle(w http.ResponseWriter, r *http.Request) {
 	// Process evaluation
 	response, err := h.evaluationService.EvaluateRequest(r.Context(), &req)
 	if err != nil {
+		log.Printf("[ERROR] Evaluation failed: %v", err)
 		h.sendErrorResponse(w, http.StatusServiceUnavailable, "LLM_SERVICE_ERROR", "Evaluation service temporarily unavailable")
 		return
 	}

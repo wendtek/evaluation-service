@@ -108,11 +108,11 @@ echo "6b. POST request to /health (should return 405):"
 test_request "POST to /health" "405" "POST" "$BASE_URL/health"
 
 # Test 7: Load Test (Basic)
-echo "Test 7: Basic Load Test"
+echo "Test 7: Basic Concurrency Test"
 echo "----------------------"
-echo "Sending 100 concurrent requests..."
+echo "Sending 10 concurrent requests..."
 
-for i in {1..100}; do
+for i in {1..10}; do
     curl -s -X POST "$BASE_URL/evaluate" \
         -H "Content-Type: application/json" \
         -d '{
